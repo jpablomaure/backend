@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de ingreso</title>
+</head>
+<body>
+    <h2>Ingrese Productos</h2>
+    <form action="/api/productos" method="POST">
+        Descripcion: <input type="text" name="Descripcion">
+        precio: <input type="text" name="precio">
+        Foto: <input type="file" name="miArchivo">
+        <button type="submit">Enviar</button>
+    </form>
+    <br><hr>
+    
+    <h2>Buscar Producto por id</h2>
+    <form action="/api/productos" method="GET">
+        Id Productos buscado: <input type="text" name="id">
+        <button type="text">Enviar</button>
+    </form>
+
+    <br><hr>
+    <h2>Actualiza Productos</h2>
+    <form action="/api/productos" method="PUT">
+        Id buscado: <input type="text" name="id">
+        Descripcion a actualizar: <input type="text" name="Descripcion">
+        precio a actualizar: <input type="text" name="precio">
+        Foto: <input type="file" name="miArchivo">
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
