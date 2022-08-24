@@ -22,18 +22,13 @@ routesProductos.get('/:id', (req, res)=>{
 });
 
 routesProductos.post('/', (req, res)=>{
-    let nuevoProducto = req.body;
-    let nuevoId=0;
-    if (nuevoProducto.length == 0) {
-        nuevoId = 1;
-    } else {
-        nuevoId = req.body[req.body.length - 1] +1;
-    }
-
-    nuevoProducto = {id: nuevoId, ...nuevoProducto};
-    console.log(nuevoProducto);
-    DB_PRODUCTOS.push(nuevoProducto);
-    res.status(201).json({msg: 'Agregado!', data: nuevoProducto});
+    let cant = DB_PRODUCTOS.length;
+    let idprod = cant+1;
+    let datos = req.body;
+    datos = { id: idprod, ... datos}
+    DB_PRODUCTOS.push(datos);
+    console.log(DB_PRODUCTOS);
+    res.status(201).json({msg: 'Agregado!', data: datos});
 });
 
 routesProductos.put('/:id' , (req, res) =>{
@@ -46,12 +41,17 @@ routesProductos.put('/:id' , (req, res) =>{
         if (indexObj == -1) {
             res.status(404).json({code: 404, msg: `Producto ${id} no encontrado`})
         } 
-        productoAct[indexObj] = {id, ...req.body}
+        productoAct[indexObj].descripcion = productoAct.descripcion;
+        productoAct[indexObj].precio = productoAct.precio;
+        productoAct[indexObj].miArchivo = productoAct.miArchivo;
+        // productoAct[indexObj] = {id, ...req.body}
         res.status(200).json(DB_PRODUCTOS[indexObj]);
     } catch (error) {
         console.log(error)
         res.status(500).json({code: 500, msg: `Error al obtener ${req.method} ${req.url}`});
     }
+    console.log('el producto actualizado')
+    console.log(DB_PRODUCTOS)
 });
 
 
